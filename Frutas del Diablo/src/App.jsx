@@ -4,7 +4,7 @@ import Navbar from './componentes/Navbar'; // RUTA CORRECTA
 import Login from './paginas/Login'; // RUTA CORRECTA
 import Register from './paginas/Register'; // RUTA CORRECTA
 import AddFruit from './paginas/AddFruit'; // Agregar página para registrar frutas
-import './styles/App.css';
+import './App.css';
 
 
 const Home = () => <h1>Bienvenido a Frutas del Diablo</h1>;
