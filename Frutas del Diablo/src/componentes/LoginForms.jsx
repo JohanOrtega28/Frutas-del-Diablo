@@ -1,38 +1,53 @@
 import React, { useState } from 'react';
-import { TextField, Button, Container, Typography } from '@mui/material';
+import { TextField, Button, Container } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [form, setForm] = useState({ email: '', password: '' });
+    const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value });
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Iniciando sesión con:", email, password);
+
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+
+        if (storedUser && storedUser.email === form.email && storedUser.password === form.password) {
+            alert("Inicio de sesión exitoso");
+            navigate('/inicio'); // Redirigir a Inicio.jsx
+        } else {
+            alert("Credenciales incorrectas. Inténtalo de nuevo.");
+        }
     };
 
     return (
         <Container maxWidth="xs">
-            <Typography variant="h4" align="center" gutterBottom>Iniciar Sesión</Typography>
             <form onSubmit={handleSubmit}>
                 <TextField 
-                    label="Correo electrónico"
-                    type="email"
-                    fullWidth
-                    margin="normal"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    label="Correo Electrónico" 
+                    name="email" 
+                    fullWidth 
+                    margin="normal" 
+                    required 
+                    value={form.email} 
+                    onChange={handleChange} 
                 />
                 <TextField 
-                    label="Contraseña"
-                    type="password"
-                    fullWidth
-                    margin="normal"
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    label="Contraseña" 
+                    type="password" 
+                    name="password" 
+                    fullWidth 
+                    margin="normal" 
+                    required 
+                    value={form.password} 
+                    onChange={handleChange} 
                 />
-                <Button type="submit" variant="contained" color="primary" fullWidth>Ingresar</Button>
+                <Button type="submit" variant="contained" color="primary" fullWidth>
+                    Iniciar Sesión
+                </Button>
             </form>
         </Container>
     );

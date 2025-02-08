@@ -14,11 +14,18 @@ const RegisterForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         if (form.password !== form.confirmPassword) {
             alert("Las contraseñas no coinciden");
             return;
         }
-        console.log("Registrando usuario:", form);
+
+        // Guardar en localStorage
+        const userData = { email: form.email, password: form.password };
+        localStorage.setItem("user", JSON.stringify(userData));
+
+        alert("Registro exitoso. Ahora puedes iniciar sesión.");
+        setForm({ email: '', password: '', confirmPassword: '' });
     };
 
     return (
