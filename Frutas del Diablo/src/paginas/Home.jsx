@@ -1,36 +1,27 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Button, Typography, Box } from '@mui/material';
+import '../estilos/Home.css'; // Importar los estilos
 
 const Home = () => {
     const navigate = useNavigate();
 
     return (
-        <Container maxWidth="sm" style={{ textAlign: 'center', marginTop: '50px' }}>
-            <Typography variant="h3" gutterBottom>Bienvenido a Frutas del Diablo</Typography>
-            <Typography variant="h6" color="textSecondary" gutterBottom>
-                Administra y descubre información sobre las Frutas del Diablo
-            </Typography>
-            <Box mt={4}>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                    style={{ marginBottom: '10px' }}
-                    onClick={() => navigate('/login')}
-                >
-                    Iniciar Sesión
-                </Button>
-                <Button
-                    variant="outlined"
-                    color="secondary"
-                    fullWidth
-                    onClick={() => navigate('/register')}
-                >
-                    Registrarse
-                </Button>
-            </Box>
-        </Container>
+        <div className="home-background">
+            <div className="home-container">
+                <h1 className="home-title">Bienvenido a Frutas del Diablo</h1>
+                <p className="home-description">
+                    Administra y descubre información sobre las Frutas del Diablo.
+                </p>
+                <div className="home-buttons">
+                    <button className="login-button" onClick={() => navigate('/login')}>
+                        Iniciar Sesión
+                    </button>
+                    <button className="register-button" onClick={() => navigate('/register')}>
+                        Registrarse
+                    </button>
+                </div>
+            </div>
+        </div>
     );
 };
 

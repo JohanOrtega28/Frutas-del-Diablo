@@ -1,0 +1,89 @@
+/* Eliminar cualquier margen o padding en toda la página */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fondo separado para evitar que se corte */
+.home-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Ocupa todo el ancho de la pantalla */
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+    background-image: url('../assets/Fruta_del_diablo.webp'); /* Imagen de fondo */
+    background-size: cover; /* Se ajusta para cubrir toda la pantalla sin bordes */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat;
+    z-index: -1; /* Envía el fondo detrás del contenido */
+}
+
+/* Contenedor principal con fondo transparente */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh; /* Mantiene la altura de la pantalla */
+    text-align: center;
+    background: rgba(0, 0, 0, 0.35); /* Fondo negro semitransparente */
+    padding: 30px;
+    border-radius: 15px; /* Bordes redondeados */
+    max-width: 600px; /* Limita el ancho del cuadro */
+    margin: auto; /* Centra el cuadro */
+}
+
+/* Estilos del título */
+.home-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ffffff !important;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    margin-bottom: 15px;
+}
+
+/* Estilos del subtítulo */
+.home-description {
+    font-size: 1.2rem;
+    color: #f1f1f1 !important;
+    margin-bottom: 25px;
+}
+
+/* Contenedor de botones */
+.home-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+/* Estilos generales de los botones */
+.home-buttons button {
+    padding: 12px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px 0;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Botón de Iniciar Sesión */
+.home-buttons .login-button {
+    background-color: #007BFF;
+    color: white;
+}
+
+.home-buttons .login-button:hover {
+    background-color: #0056b3;
+}
+
+/* Botón de Registro */
+.home-buttons .register-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.home-buttons .register-button:hover {
+    background-color: #218838;
+}
