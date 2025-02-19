@@ -82,7 +82,7 @@ const EditarFruta = () => {
                             borderRadius: '4px',
                         }}
                     >
-                        <option value="">Tipo de Fruta </option>
+                        <option value="">Tipo de Fruta</option>
                         <option value="Paramecia">Paramecia</option>
                         <option value="Logia">Logia</option>
                         <option value="Zoan">Zoan</option>

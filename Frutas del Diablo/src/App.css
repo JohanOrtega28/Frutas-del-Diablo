@@ -1,98 +1,74 @@
 /* Estilos generales */
-body {
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
-  color: #333;
+.profile-container {
+  background: linear-gradient(to bottom, #1e3c72, #2a5298); /* Fondo inspirado en el mar */
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Contenedor principal */
-#root {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+.profile-title {
+  font-size: 2rem;
+  color: #ffcc00; /* Dorado como el One Piece */
+  text-shadow: 2px 2px 4px #000; /* Sombra para resaltar */
+  margin-bottom: 20px;
   text-align: center;
 }
 
-/* Navbar */
-.navbar {
-  background-color: #333;
-  color: white;
-  padding: 15px;
+.profile-info {
+  background: rgba(255, 255, 255, 0.9); /* Fondo semi-transparente */
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-info-item {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.profile-button {
+  background: #ffcc00; /* Dorado brillante */
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.profile-button:hover {
+  background: #ffdd40; /* Más brillo al pasar el mouse */
+}
+
+.fruit-list {
+  background: rgba(255, 255, 255, 0.9); /* Fondo semi-transparente */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.fruit-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.navbar a {
-  color: white;
-  text-decoration: none;
-  margin: 0 15px;
-  font-size: 16px;
-}
-
-.navbar a:hover {
-  text-decoration: underline;
-}
-
-/* Formulario de registro de frutas */
-.form-container {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
-  margin: auto;
-}
-
-.form-container input,
-.form-container select,
-.form-container textarea {
-  width: 100%;
   padding: 10px;
-  margin-top: 10px;
-  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Botón de guardar */
-.button {
-  background-color: #28a745;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  width: 100%;
-  margin-top: 15px;
+.fruit-item:hover {
+  transform: scale(1.02); /* Efecto de escala al pasar el mouse */
+  transition: transform 0.3s ease;
 }
 
-.button:hover {
-  background-color: #218838;
-}
-
-/* Página de inicio */
-.home-container {
+.no-fruits-message {
   text-align: center;
-  margin-top: 50px;
-}
-
-.home-title {
-  font-size: 32px;
-  color: #333;
-}
-
-.home-description {
-  font-size: 18px;
-  color: #555;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .navbar {
-      flex-direction: column;
-      text-align: center;
-  }
+  font-size: 1.2rem;
+  color: #ffcc00; /* Mensaje dorado */
 }
