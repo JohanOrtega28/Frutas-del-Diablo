@@ -5,6 +5,7 @@ import { Container, Grid } from '@mui/material';
 import parameciaImg from '../assets/paramecia.jpg';
 import logiaImg from '../assets/logia.jpg';
 import zoanImg from '../assets/zoan.jpg';
+import '../estilos/global.css';
 
 const frutas = [
     {
@@ -24,12 +25,16 @@ const frutas = [
     }
 ];
 
-
 const Inicio = () => {
     return (
         <>
             <NavbarInicio />
-            <Container style={{ marginTop: '50px' }}>
+            <Container
+                style={{
+                    marginTop: '50px',
+                    fontFamily: '"ONE PIECE", sans-serif', // Aplicar la tipografía
+                }}
+            >
                 <Grid container spacing={5} justifyContent="center">
                     {frutas.map((fruta, index) => (
                         <Grid item key={index}>

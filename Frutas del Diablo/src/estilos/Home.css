@@ -32,21 +32,24 @@
     border-radius: 15px; /* Bordes redondeados */
     max-width: 600px; /* Limita el ancho del cuadro */
     margin: auto; /* Centra el cuadro */
+    font-family: 'ONE PIECE', sans-serif; /* Aplicar la fuente ONE PIECE */
 }
 
 /* Estilos del título */
 .home-title {
-    font-size: 2.5rem;
+    font-family: 'ONE PIECE', sans-serif; /* Fuente personalizada */
+    font-size: 3rem; /* Tamaño más grande para destacar */
     font-weight: bold;
-    color: #ffffff !important;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    color: #ffcc00; /* Dorado como el One Piece */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8); /* Sombra para resaltar */
     margin-bottom: 15px;
 }
 
 /* Estilos del subtítulo */
 .home-description {
-    font-size: 1.2rem;
-    color: #f1f1f1 !important;
+    font-family: 'ONE PIECE', sans-serif; /* Fuente personalizada */
+    font-size: 1.5rem;
+    color: #ffffff; /* Texto blanco */
     margin-bottom: 25px;
 }
 
@@ -59,6 +62,7 @@
 
 /* Estilos generales de los botones */
 .home-buttons button {
+    font-family: 'ONE PIECE', sans-serif; /* Fuente personalizada */
     padding: 12px;
     font-size: 1.2rem;
     border: none;
@@ -70,20 +74,18 @@
 
 /* Botón de Iniciar Sesión */
 .home-buttons .login-button {
-    background-color: #007BFF;
+    background-color: #007BFF; /* Azul brillante */
     color: white;
 }
-
 .home-buttons .login-button:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Azul más oscuro */
 }
 
 /* Botón de Registro */
 .home-buttons .register-button {
-    background-color: #28a745;
+    background-color: #28a745; /* Verde brillante */
     color: white;
 }
-
 .home-buttons .register-button:hover {
-    background-color: #218838;
+    background-color: #218838; /* Verde más oscuro */
 }

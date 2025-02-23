@@ -1,4 +1,3 @@
-// paginas/Perfil.jsx
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FruitContext } from '../context/FruitContext'; // Importa el contexto de frutas
@@ -38,87 +37,88 @@ const Perfil = () => {
     <Container
       sx={{
         marginTop: '20px',
-        background: 'linear-gradient(45deg, #1e3c72 30%, #2a5298 90%)', // Fondo inspirado en el mar
+        background: 'linear-gradient(45deg, #1e3c72 30%, #2a5298 90%)',
         minHeight: '100vh',
         padding: '20px',
         borderRadius: '15px',
         boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.2)',
+        fontFamily: '"ONE PIECE", sans-serif', // Aplicar la tipografía
       }}
     >
-      {/* Contenedor principal */}
       <Paper
         sx={{
-          padding: '20px',
+          padding: '30px',
           borderRadius: '15px',
-          background: 'rgba(255, 255, 255, 0.95)', // Fondo semi-transparente
+          background: 'rgba(255, 255, 255, 0.95)',
+          fontFamily: '"ONE PIECE", sans-serif', // Aplicar la tipografía
         }}
       >
-        {/* Título de la sección */}
         <Typography
           variant="h4"
           sx={{
-            color: '#ffcc00', // Dorado como el One Piece
+            color: '#ffcc00',
             fontWeight: 'bold',
             textAlign: 'center',
-            textShadow: '2px 2px 4px #000', // Sombra para resaltar
+            textShadow: '2px 2px 4px #000',
             marginBottom: '20px',
+            fontSize: '2.5rem', // Tamaño grande para el título
+            fontFamily: '"ONE PIECE", sans-serif', // Aplicar la tipografía
           }}
         >
           Perfil de Usuario
         </Typography>
 
-        {/* Datos del usuario */}
         <Box
           sx={{
             marginBottom: '20px',
             padding: '15px',
-            border: '2px solid #ffcc00', // Borde dorado
+            border: '2px solid #ffcc00',
             borderRadius: '10px',
             background: '#f9f9f9',
+            fontFamily: '"ONE PIECE", sans-serif', // Aplicar la tipografía
           }}
         >
-          <Typography variant="h6">Nombre: {user.nombre}</Typography>
-          <Typography variant="h6">Correo: {user.correo}</Typography>
-          <Typography variant="h6">Sexo: {user.sexo || 'No especificado'}</Typography>
-          <Typography variant="h6">Edad: {user.edad || 'No especificada'}</Typography>
-          <Typography variant="h6">Rol: Usuario Regular</Typography>
+          <Typography variant="h6" sx={{ fontFamily: '"ONE PIECE", sans-serif', fontSize: '1.4rem' }}>Nombre: {user.nombre}</Typography>
+          <Typography variant="h6" sx={{ fontFamily: '"ONE PIECE", sans-serif', fontSize: '1.4rem' }}>Correo: {user.correo}</Typography>
+          <Typography variant="h6" sx={{ fontFamily: '"ONE PIECE", sans-serif', fontSize: '1.4rem' }}>Sexo: {user.sexo || 'No especificado'}</Typography>
+          <Typography variant="h6" sx={{ fontFamily: '"ONE PIECE", sans-serif', fontSize: '1.4rem' }}>Edad: {user.edad || 'No especificada'}</Typography>
+          <Typography variant="h6" sx={{ fontFamily: '"ONE PIECE", sans-serif', fontSize: '1.4rem' }}>Rol: Usuario Regular</Typography>
         </Box>
 
-        {/* Botón para editar el perfil */}
         <Button
           variant="contained"
           fullWidth
           sx={{
-            background: 'linear-gradient(45deg, #ffcc00 30%, #ffdd40 90%)', // Dorado brillante
-            color: '#000', // Texto negro
+            background: 'linear-gradient(45deg, #ffcc00 30%, #ffdd40 90%)',
+            color: '#000',
             padding: '10px',
-            fontSize: '1rem',
+            fontSize: '1.2rem', // Tamaño grande para el botón
             '&:hover': {
-              background: 'linear-gradient(45deg, #ffdd40 30%, #ffcc00 90%)', // Más brillo al pasar el mouse
+              background: 'linear-gradient(45deg, #ffdd40 30%, #ffcc00 90%)',
             },
+            fontFamily: '"ONE PIECE", sans-serif', // Aplicar la tipografía
           }}
           onClick={() => navigate('/editar-perfil')}
         >
           EDITAR PERFIL
         </Button>
 
-        {/* Separador */}
         <Divider sx={{ margin: '20px 0' }} />
 
-        {/* Sección de frutas registradas */}
         <Typography
           variant="h5"
           sx={{
-            color: '#ffcc00', // Dorado como el One Piece
+            color: '#ffcc00',
             fontWeight: 'bold',
             textAlign: 'center',
             marginBottom: '20px',
+            fontSize: '2rem', // Tamaño grande para el subtítulo
+            fontFamily: '"ONE PIECE", sans-serif', // Aplicar la tipografía
           }}
         >
           Frutas Registradas
         </Typography>
 
-        {/* Lista de frutas */}
         {frutas.length > 0 ? (
           <List>
             {frutas.map((fruta) => (
@@ -133,15 +133,14 @@ const Perfil = () => {
                   background: '#fff',
                   borderRadius: '8px',
                   boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+                  fontFamily: '"ONE PIECE", sans-serif', // Aplicar la tipografía
                 }}
               >
-                {/* Detalles de la fruta */}
                 <ListItemText
-                  primary={<span style={{ fontWeight: 'bold', color: '#333' }}>{fruta.nombre}</span>}
+                  primary={<span style={{ fontWeight: 'bold', color: '#333', fontFamily: '"ONE PIECE", sans-serif', fontSize: '1.4rem' }}>{fruta.nombre}</span>}
                   secondary={`Tipo: ${fruta.tipo}`}
                   sx={{ flexGrow: 1 }}
                 />
-                {/* Botones de acción */}
                 <Box sx={{ display: 'flex', gap: '10px' }}>
                   <Button
                     variant="outlined"
@@ -152,6 +151,8 @@ const Perfil = () => {
                         borderColor: '#ffdd40',
                         color: '#ffdd40',
                       },
+                      fontFamily: '"ONE PIECE", sans-serif', // Aplicar la tipografía
+                      fontSize: '1.2rem', // Tamaño grande para el botón
                     }}
                     onClick={() => handleEditarFruta(fruta.id)}
                   >
@@ -160,6 +161,7 @@ const Perfil = () => {
                   <Button
                     variant="outlined"
                     color="error"
+                    sx={{ fontFamily: '"ONE PIECE", sans-serif', fontSize: '1.2rem' }} // Aplicar la tipografía
                     onClick={() => handleEliminarFruta(fruta.id)}
                   >
                     Eliminar
@@ -174,6 +176,8 @@ const Perfil = () => {
               textAlign: 'center',
               color: '#ffcc00',
               fontStyle: 'italic',
+              fontFamily: '"ONE PIECE", sans-serif', // Aplicar la tipografía
+              fontSize: '1.4rem', // Tamaño grande para el mensaje
             }}
           >
             No has registrado ninguna fruta todavía.

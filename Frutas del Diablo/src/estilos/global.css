@@ -1,6 +1,24 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+@font-face {
+    font-family: 'ONE PIECE';
+    src: url('./ONE%20PIECE.ttf') format('truetype'); /* Asegúrate de que la ruta sea correcta */
 }
+
+body, .one-piece-font {
+    font-family: 'ONE PIECE', sans-serif; /* Aplica la fuente a tu contenido */
+}
+
+h4 {
+    font-family: 'ONE PIECE', sans-serif !important; /* Asegúrate de que se use la fuente ONE PIECE */
+    font-size: 1.5rem;
+    color: #ffcc00; /* Dorado como el One Piece */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Sombra para resaltar */
+  }
+
+h5 {
+    font-family: 'ONE PIECE', sans-serif !important; /* Asegúrate de que se use la fuente ONE PIECE */
+    font-size: 1.5rem;
+    color: #ffcc00; /* Dorado como el One Piece */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Sombra para resaltar */
+}
+
+
