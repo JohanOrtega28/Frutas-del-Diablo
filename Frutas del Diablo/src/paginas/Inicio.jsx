@@ -1,7 +1,9 @@
+// src/paginas/Inicio.jsx
 import React from 'react';
 import NavbarInicio from '../componentes/NavbarInicio';
 import FrutaCard from '../componentes/FrutaCard';
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import parameciaImg from '../assets/paramecia.jpg';
 import logiaImg from '../assets/logia.jpg';
 import zoanImg from '../assets/zoan.jpg';
@@ -24,8 +26,9 @@ const frutas = [
     }
 ];
 
-
 const Inicio = () => {
+    const navigate = useNavigate();
+
     return (
         <>
             <NavbarInicio />
@@ -37,6 +40,15 @@ const Inicio = () => {
                         </Grid>
                     ))}
                 </Grid>
+
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => navigate('/lista-frutas')}
+                    style={{ marginTop: '20px', display: 'block', marginLeft: 'auto', marginRight: 'auto' }}
+                >
+                    Ver Más
+                </Button>
             </Container>
         </>
     );
