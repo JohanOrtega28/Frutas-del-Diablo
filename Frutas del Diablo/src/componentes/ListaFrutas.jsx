@@ -1,5 +1,5 @@
-// src/componentes/ListaFrutas.jsx
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { db } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { Container, Grid, Card, CardContent, Typography, CardMedia, CircularProgress } from '@mui/material';
@@ -7,6 +7,9 @@ import { Container, Grid, Card, CardContent, Typography, CardMedia, CircularProg
 const ListaFrutas = () => {
     const [frutas, setFrutas] = useState([]);
     const [loading, setLoading] = useState(true);
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const tipoFruta = queryParams.get('tipo'); // Obtener el tipo de fruta desde la URL
 
     useEffect(() => {
         const fetchFrutas = async () => {
@@ -19,9 +22,14 @@ const ListaFrutas = () => {
                 }
 
                 const frutasData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                console.log("Frutas obtenidas:", frutasData);
 
-                setFrutas(frutasData);
+                // Filtrar frutas por tipo si hay un tipo especificado en la URL
+                const frutasFiltradas = tipoFruta 
+                    ? frutasData.filter(fruta => fruta.tipo.toLowerCase() === tipoFruta.toLowerCase())
+                    : frutasData;
+
+                console.log("Frutas obtenidas:", frutasFiltradas);
+                setFrutas(frutasFiltradas);
             } catch (error) {
                 console.error("Error obteniendo frutas:", error);
             } finally {
@@ -29,16 +37,16 @@ const ListaFrutas = () => {
             }
         };
         fetchFrutas();
-    }, []);
+    }, [tipoFruta]); // Dependencia en el tipo para que actualice al cambiar la URL
 
     if (loading) return <CircularProgress />;
 
     return (
         <Container style={{ marginTop: '20px' }}>
             <Typography variant="h4" gutterBottom align="center">
-                Frutas del Diablo
+                {tipoFruta ? `Frutas del Tipo: ${tipoFruta}` : 'Todas las Frutas'}
             </Typography>
-            {frutas.length === 0 && <Typography variant="h6" color="error" align="center">No hay frutas disponibles en Firestore</Typography>}
+            {frutas.length === 0 && <Typography variant="h6" color="error" align="center">No hay frutas disponibles</Typography>}
             <Grid container spacing={3} justifyContent="center">
                 {frutas.map((fruta) => (
                     <Grid item key={fruta.id} xs={12} sm={6} md={4}>
