@@ -1,77 +1,67 @@
-// componentes/Navbar.jsx
-import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, Button } from '@mui/material';
+import React, { useState, useContext } from 'react';
+import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import { UserContext } from '../context/UserContext';
 
 const Navbar = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [isAuthenticated, setIsAuthenticated] = useState(false); // Estado local para autenticación
+    const { user } = useContext(UserContext);
+    const [anchorEl, setAnchorEl] = useState(null);
 
-    // Función para simular inicio de sesión
-    const handleLogin = () => {
-        setIsAuthenticated(true);
-        navigate('/inicio');
+    // Verifica si estás en una página donde NO debe aparecer el icono de perfil
+    const isListaFrutas = location.pathname.startsWith('/lista-frutas');
+    const isRegistro = location.pathname === '/register';
+
+    // Maneja el clic en el ícono de perfil
+    const handleProfileClick = (event) => {
+        setAnchorEl(event.currentTarget);
     };
 
-    // Función para simular cierre de sesión con confirmación
-    const handleLogout = () => {
-        const confirmLogout = window.confirm('¿Estás seguro de que deseas cerrar sesión?');
-        if (confirmLogout) {
-            setIsAuthenticated(false); // Actualiza el estado de autenticación
-            navigate('/'); // Redirige al usuario a la página inicial
-        }
+    // Cierra el menú desplegable
+    const handleClose = () => {
+        setAnchorEl(null);
     };
 
     return (
         <AppBar position="static" style={{ backgroundColor: '#222' }}>
             <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
-                {/* Título de la aplicación */}
                 <Typography
                     variant="h6"
                     style={{ cursor: 'pointer' }}
-                    onClick={() => navigate('/inicio')}
+                    onClick={() => navigate('/')}
                 >
-                    <span>Frutas del Diablo</span>
+                    Frutas del Diablo
                 </Typography>
 
-                {/* Botones condicionales */}
-                <div>
-                    {location.pathname === '/editar-perfil' ? (
-                        // Botón para volver a Configuración en /editar-perfil
-                        <Button color="inherit" onClick={() => navigate('/configuracion')}>
-                            Volver a Configuración
-                        </Button>
-                    ) : ['/add-fruit', '/perfil', '/configuracion'].includes(location.pathname) ? (
-                        // Botón "Volver al Inicio" en páginas específicas
-                        <Button color="inherit" onClick={() => navigate('/inicio')}>
-                            Volver al Inicio
-                        </Button>
-                    ) : isAuthenticated ? (
-                        // Botones para usuarios autenticados
-                        <>
-                            <Button color="inherit" onClick={() => navigate('/add-fruit')}>
-                                Añadir Fruta
-                            </Button>
-                            <Button color="inherit" onClick={() => navigate('/perfil')}>
-                                Perfil
-                            </Button>
-                            <Button color="inherit" onClick={handleLogout}>
-                                Cerrar Sesión
-                            </Button>
-                        </>
-                    ) : (
-                        // Botones para usuarios no autenticados
-                        <>
-                            <Button color="inherit" onClick={handleLogin}>
+                {/* Mostrar icono de perfil SOLO si el usuario ha iniciado sesión y NO está en registro */}
+                {(isListaFrutas || user) && !isRegistro ? (
+                    <div>
+                        <IconButton color="inherit" onClick={handleProfileClick}>
+                            <AccountCircle />
+                        </IconButton>
+                        <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
+                            <MenuItem onClick={() => { navigate('/perfil'); handleClose(); }}>Perfil</MenuItem>
+                            <MenuItem onClick={() => { navigate('/configuracion'); handleClose(); }}>Configuración</MenuItem>
+                            <MenuItem onClick={() => { localStorage.removeItem("user"); navigate('/'); handleClose(); }}>
+                                Cerrar sesión
+                            </MenuItem>
+                        </Menu>
+                    </div>
+                ) : (
+                    // Mostrar los botones de inicio de sesión y registro si no está en lista de frutas
+                    !isRegistro && (
+                        <div>
+                            <Button color="inherit" onClick={() => navigate('/login')}>
                                 Iniciar Sesión
                             </Button>
                             <Button color="inherit" onClick={() => navigate('/register')}>
                                 Registrarse
                             </Button>
-                        </>
-                    )}
-                </div>
+                        </div>
+                    )
+                )}
             </Toolbar>
         </AppBar>
     );

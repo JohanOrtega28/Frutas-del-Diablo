@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
     const [form, setForm] = useState({
@@ -7,6 +8,8 @@ const RegisterForm = () => {
         password: '',
         confirmPassword: '',
     });
+
+    const navigate = useNavigate(); // Hook para redirigir
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -24,8 +27,10 @@ const RegisterForm = () => {
         const userData = { email: form.email, password: form.password };
         localStorage.setItem("user", JSON.stringify(userData));
 
-        alert("Registro exitoso. Ahora puedes iniciar sesión.");
-        setForm({ email: '', password: '', confirmPassword: '' });
+        alert("Registro exitoso. Ahora serás redirigido al inicio de sesión.");
+        
+        // Redirigir automáticamente a la página de login
+        navigate('/login');
     };
 
     return (
@@ -62,7 +67,9 @@ const RegisterForm = () => {
                     value={form.confirmPassword}
                     onChange={handleChange}
                 />
-                <Button type="submit" variant="contained" color="primary" fullWidth>Registrarse</Button>
+                <Button type="submit" variant="contained" color="primary" fullWidth>
+                    Registrarse
+                </Button>
             </form>
         </Container>
     );
