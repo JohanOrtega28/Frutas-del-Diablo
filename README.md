@@ -20,7 +20,7 @@ Asegúrate de tener instalado:
 Clona el repositorio y entra en el directorio del proyecto:
 ```
 git clone: https://github.com/JohanOrtega28/Frutas-del-Diablo.git
-cd Frutas-del-Diablo
+cd Frutas del Diablo
 ```
 Instala las dependencias necesarias:
 ```
