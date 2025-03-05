@@ -16,7 +16,7 @@ export const UserProvider = ({ children }) => {
                   edad: '', // Nuevo campo
               };
     });
-
+//g
     // Función para actualizar los datos del usuario
     const updateUser = (updatedUser) => {
         setUser(updatedUser);
