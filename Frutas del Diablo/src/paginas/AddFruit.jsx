@@ -45,23 +45,20 @@ const AddFruit = () => {
 
             const newFruitId = await addFruit(fruitData);
 
-            alert("Fruta agregada correctamente!");
-            
-            // Resetear formulario
-            setNombre('');
-            setDescripcion('');
-            setTipo('');
-            setImagen(null);
+        console.log("✅ Fruta agregada con ID:", docRef.id);
+        alert("Fruta agregada correctamente!");
+        
+        setNombre('');
+        setDescripcion('');
+        setTipo('');
+    } catch (error) {
+        console.error("❌ Error al agregar fruta:", error);
+        alert("Hubo un error al guardar la fruta.");
+    } finally {
+        setLoading(false);
+    }
+};
 
-            // Navegar al perfil
-            navigate('/perfil');
-        } catch (error) {
-            console.error("❌ Error al agregar fruta:", error);
-            alert("Hubo un error al guardar la fruta.");
-        } finally {
-            setLoading(false);
-        }
-    };
 
     return (
         <Container style={{ marginTop: '20px', maxWidth: '400px' }}>
@@ -69,55 +66,11 @@ const AddFruit = () => {
                 Agregar Nueva Fruta del Diablo
             </Typography>
             <form onSubmit={handleAddFruit}>
-                <TextField 
-                    fullWidth 
-                    label="Nombre" 
-                    value={nombre} 
-                    onChange={(e) => setNombre(e.target.value)} 
-                    margin="normal" 
-                    required 
-                />
-                <TextField 
-                    fullWidth 
-                    label="Descripción" 
-                    value={descripcion} 
-                    onChange={(e) => setDescripcion(e.target.value)} 
-                    margin="normal" 
-                    required 
-                    multiline 
-                    rows={4}
-                />
-                <TextField 
-                    fullWidth 
-                    select 
-                    label="Tipo de Fruta" 
-                    value={tipo} 
-                    onChange={(e) => setTipo(e.target.value)} 
-                    margin="normal" 
-                    required
-                    SelectProps={{
-                        native: true,
-                    }}
-                >
-                    <option value="">Selecciona un tipo</option>
-                    <option value="Paramecia">Paramecia</option>
-                    <option value="Logia">Logia</option>
-                    <option value="Zoan">Zoan</option>
-                </TextField>
-                <input 
-                    type="file" 
-                    accept="image/*" 
-                    onChange={handleFileChange} 
-                    style={{ marginTop: '10px', marginBottom: '10px' }} 
-                />
-                <Button 
-                    type="submit" 
-                    variant="contained" 
-                    color="primary" 
-                    fullWidth 
-                    disabled={loading} 
-                    style={{ marginTop: '20px' }}
-                >
+                <TextField fullWidth label="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} margin="normal" required />
+                <TextField fullWidth label="Descripción" value={descripcion} onChange={(e) => setDescripcion(e.target.value)} margin="normal" required />
+                <TextField fullWidth label="Tipo" value={tipo} onChange={(e) => setTipo(e.target.value)} margin="normal" required />
+                <input type="file" accept="image/*" onChange={handleFileChange} style={{ marginTop: '10px' }} required />
+                <Button type="submit" variant="contained" color="primary" fullWidth disabled={loading} style={{ marginTop: '20px' }}>
                     {loading ? "Guardando..." : "Agregar Fruta"}
                 </Button>
             </form>

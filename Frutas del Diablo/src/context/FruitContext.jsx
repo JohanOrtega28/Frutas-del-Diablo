@@ -21,28 +21,16 @@ export const FruitProvider = ({ children }) => {
             return null;
         }
 
-        try {
-            // Guardar en Firestore
-            const docRef = await addDoc(collection(db, "frutasDelDiablo"), fruta);
-            
-            // Agregar ID a los datos de la fruta
-            const newFruit = { ...fruta, id: docRef.id };
+        // Si no hay duplicados, agregar la fruta
+        const newFrutas = [...frutas, { ...fruta, id: Date.now() }]; // Asigna un ID único
+        setFrutas(newFrutas);
+        localStorage.setItem('frutas', JSON.stringify(newFrutas)); // Guardar en localStorage
 
-            // Actualizar estado local
-            const newFrutas = [...frutas, newFruit];
-            setFrutas(newFrutas);
-            
-            // Guardar en localStorage
-            localStorage.setItem('frutas', JSON.stringify(newFrutas));
-
-            return docRef.id;
-        } catch (error) {
-            console.error("Error al agregar fruta:", error);
-            alert("Hubo un error al guardar la fruta.");
-            return null;
-        }
+        // Mostrar alerta de éxito después de guardar
+        alert(`Fruta "${fruta.nombre}" guardada con éxito!`);
     };
 
+    // Función para editar una fruta
     const editFruit = (id, updatedFruit) => {
         const updatedFrutas = frutas.map((fruta) =>
             fruta.id === id ? { ...fruta, ...updatedFruit } : fruta

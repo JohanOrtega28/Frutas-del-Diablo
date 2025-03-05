@@ -21,10 +21,11 @@ const NavbarInicio = () => {
                 <Typography
                     variant="h6"
                     style={{ cursor: 'pointer' }}
-                    onClick={() => navigate('/')}
+                    onClick={() => navigate('/inicio')} // ✅ Ahora redirige a Inicio
                 >
                     Frutas del Diablo
                 </Typography>
+
 
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Button color="inherit" onClick={() => navigate('/add-fruit')}>

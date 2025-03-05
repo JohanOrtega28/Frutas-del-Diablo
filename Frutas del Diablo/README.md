@@ -5,7 +5,7 @@ Las Frutas del Diablo son misteriosas y poderosas, otorgando habilidades sobrena
 Este proyecto utiliza las siguientes tecnologías:
 
 - Frontend: React.js + JavaScript
-- Estilos: Material UI + CSS
+- Estilos: Material UI + CSS 
 - Backend: Firebase 
 - Empaquetador: Vite
 
@@ -14,7 +14,7 @@ Para ejecutar el proyecto en tu máquina local, sigue estos pasos:
 
 1️⃣ Prerrequisitos
 Asegúrate de tener instalado:
-- Node.js (v16 o superior)
+- Node.js
 
 2️⃣ Instalación
 Clona el repositorio y entra en el directorio del proyecto:

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import '../estilos/loginforms.css'; 
+import { auth, googleProvider } from '../firebase'; // 🔥 Importamos Firebase Auth
+import { signInWithPopup, signOut } from "firebase/auth"; // 🔥 Importamos funciones de Firebase
+import '../estilos/loginforms.css';
 import logo from '../assets/inicio.jpeg';
 
 const LoginForm = () => {
@@ -19,18 +21,33 @@ const LoginForm = () => {
 
         if (storedUser && storedUser.email === form.email && storedUser.password === form.password) {
             alert("Inicio de sesión exitoso");
-            navigate('/inicio'); // Redirigir a Inicio.jsx
+            navigate('/inicio');
         } else {
             alert("Credenciales incorrectas. Inténtalo de nuevo.");
         }
     };
 
+    // 🔥 Iniciar sesión con Google
+    const handleGoogleLogin = async () => {
+        try {
+            const result = await signInWithPopup(auth, googleProvider);
+            const user = result.user;
+            console.log("✅ Usuario autenticado:", user);
+
+            // Guardamos el usuario en localStorage
+            localStorage.setItem("user", JSON.stringify({ email: user.email, name: user.displayName }));
+
+            alert(`Bienvenido, ${user.displayName}`);
+            navigate('/inicio'); // Redirigir a la página de inicio
+        } catch (error) {
+            console.error("❌ Error en autenticación con Google:", error);
+            alert("Error al iniciar sesión con Google");
+        }
+    };
+
     return (
         <div className="login-container">
-            <div 
-                className="login-image-container"
-                style={{ backgroundImage: `url(${logo})` }} 
-            />
+            <div className="login-image-container" style={{ backgroundImage: `url(${logo})` }} />
             <div className="login-box">
                 <Typography className="login-title" variant="h4" align="center" gutterBottom>
                     Iniciar Sesión
@@ -61,6 +78,17 @@ const LoginForm = () => {
                         Iniciar Sesión
                     </Button>
                 </form>
+
+                {/* 🔥 Botón de inicio de sesión con Google */}
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    fullWidth
+                    onClick={handleGoogleLogin}
+                    style={{ marginTop: '10px', backgroundColor: '#db4437', color: 'white' }}
+                >
+                    Iniciar Sesión con Google
+                </Button>
             </div>
         </div>
     );
