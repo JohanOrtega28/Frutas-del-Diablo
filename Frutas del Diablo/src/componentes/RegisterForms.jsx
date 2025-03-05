@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import '../estilos/registerforms.css'; // Importamos los estilos
+import logo from '../assets/tripulacion.webp'; // Reemplázalo con la imagen deseada
+
 
 const RegisterForm = () => {
     const [form, setForm] = useState({
@@ -34,45 +37,59 @@ const RegisterForm = () => {
     };
 
     return (
-        <Container maxWidth="xs">
-            <Typography variant="h4" align="center" gutterBottom>Registro</Typography>
-            <form onSubmit={handleSubmit}>
-                <TextField 
-                    label="Correo electrónico"
-                    type="email"
-                    name="email"
-                    fullWidth
-                    margin="normal"
-                    required
-                    value={form.email}
-                    onChange={handleChange}
-                />
-                <TextField 
-                    label="Contraseña"
-                    type="password"
-                    name="password"
-                    fullWidth
-                    margin="normal"
-                    required
-                    value={form.password}
-                    onChange={handleChange}
-                />
-                <TextField 
-                    label="Confirmar Contraseña"
-                    type="password"
-                    name="confirmPassword"
-                    fullWidth
-                    margin="normal"
-                    required
-                    value={form.confirmPassword}
-                    onChange={handleChange}
-                />
-                <Button type="submit" variant="contained" color="primary" fullWidth>
-                    Registrarse
-                </Button>
-            </form>
-        </Container>
+        <div className="register-container">
+            {/* Contenedor de la imagen */}
+            <div 
+                className="register-image-container"
+                style={{ backgroundImage: `url(${logo})` }} 
+            />
+            <div className="register-box">
+                <Typography className="register-title" variant="h4" align="center" gutterBottom>
+                    Registro
+                </Typography>
+                <form onSubmit={handleSubmit}>
+                    <TextField
+                        className="register-input"
+                        label="Correo electrónico"
+                        type="email"
+                        name="email"
+                        fullWidth
+                        margin="normal"
+                        required
+                        value={form.email}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        className="register-input"
+                        label="Contraseña"
+                        type="password"
+                        name="password"
+                        fullWidth
+                        margin="normal"
+                        required
+                        value={form.password}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        className="register-input"
+                        label="Confirmar Contraseña"
+                        type="password"
+                        name="confirmPassword"
+                        fullWidth
+                        margin="normal"
+                        required
+                        value={form.confirmPassword}
+                        onChange={handleChange}
+                    />
+                    <button type="submit" className="register-button">
+                        Registrarse
+                    </button>
+                </form>
+            </div>
+        </div>
     );
+    
+    
 };
 
 export default RegisterForm;

@@ -4,7 +4,7 @@ import { db } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { Container, Grid, Card, CardContent, Typography, CardMedia, CircularProgress } from '@mui/material';
 
-const ListaFrutas = () => {
+const ListaFrutas = ({ searchQuery }) => {
     const [frutas, setFrutas] = useState([]);
     const [loading, setLoading] = useState(true);
     const location = useLocation();
@@ -39,6 +39,11 @@ const ListaFrutas = () => {
         fetchFrutas();
     }, [tipoFruta]); // Dependencia en el tipo para que actualice al cambiar la URL
 
+    // Filtrar frutas según el término de búsqueda
+    const frutasFiltradas = frutas.filter((fruta) =>
+        fruta.nombre.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     if (loading) return <CircularProgress />;
 
     return (
@@ -46,9 +51,9 @@ const ListaFrutas = () => {
             <Typography variant="h4" gutterBottom align="center">
                 {tipoFruta ? `Frutas del Tipo: ${tipoFruta}` : 'Todas las Frutas'}
             </Typography>
-            {frutas.length === 0 && <Typography variant="h6" color="error" align="center">No hay frutas disponibles</Typography>}
+            {frutasFiltradas.length === 0 && <Typography variant="h6" color="error" align="center">No hay frutas disponibles</Typography>}
             <Grid container spacing={3} justifyContent="center">
-                {frutas.map((fruta) => (
+                {frutasFiltradas.map((fruta) => (
                     <Grid item key={fruta.id} xs={12} sm={6} md={4}>
                         <Card style={{ padding: '10px' }}>
                             <CardContent>
