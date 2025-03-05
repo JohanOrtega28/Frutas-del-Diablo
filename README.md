@@ -1,4 +1,5 @@
-#📖Enciclopedia de Frutas del Diablo 
+📖#Enciclopedia de Frutas del Diablo 
+
 Las Frutas del Diablo son misteriosas y poderosas, otorgando habilidades sobrenaturales a quienes las consumen. Sin embargo, su rareza y la falta de información detallada dificultan su estudio. Este proyecto busca resolver ese problema mediante una enciclopedia interactiva, donde los usuarios pueden registrar, consultar y analizar diferentes tipos de Frutas del Diablo.
 ##🛠️ Tecnologías utilizadas
 Este proyecto utiliza las siguientes tecnologías:
