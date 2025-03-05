@@ -1,12 +1,14 @@
 import React, { useState, useContext } from 'react';
-import { db, storage } from '../firebase';
+import { storage } from '../firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { TextField, Button, Container, Typography } from '@mui/material';
+import { TextField, Button, Container, Typography, MenuItem } from '@mui/material';
 import { FruitContext } from '../context/FruitContext';
+import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 
 const AddFruit = () => {
     const { addFruit } = useContext(FruitContext);
+    const { user } = useContext(UserContext);
     const navigate = useNavigate();
     const [nombre, setNombre] = useState('');
     const [descripcion, setDescripcion] = useState('');
@@ -40,25 +42,33 @@ const AddFruit = () => {
                 descripcion,
                 tipo,
                 imagenURL,
-                fechaCreacion: new Date()
+                fechaCreacion: new Date(),
+                userId: user.id,
             };
 
-            const newFruitId = await addFruit(fruitData);
+            console.log("Datos de la fruta a agregar:", fruitData);
 
-        console.log("✅ Fruta agregada con ID:", docRef.id);
-        alert("Fruta agregada correctamente!");
-        
-        setNombre('');
-        setDescripcion('');
-        setTipo('');
-    } catch (error) {
-        console.error("❌ Error al agregar fruta:", error);
-        alert("Hubo un error al guardar la fruta.");
-    } finally {
-        setLoading(false);
-    }
-};
+            const fruitId = await addFruit(fruitData);
 
+            if (fruitId) {
+                console.log("✅ Fruta agregada con ID:", fruitId);
+
+                // Resetear formulario
+                setNombre('');
+                setDescripcion('');
+                setTipo('');
+                setImagen(null);
+
+                // Redirigir a la página de inicio o lista de frutas
+                navigate('/inicio');
+            }
+        } catch (error) {
+            console.error("❌ Error al agregar fruta:", error);
+            alert("Hubo un error al guardar la fruta.");
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <Container style={{ marginTop: '20px', maxWidth: '400px' }}>
@@ -66,11 +76,51 @@ const AddFruit = () => {
                 Agregar Nueva Fruta del Diablo
             </Typography>
             <form onSubmit={handleAddFruit}>
-                <TextField fullWidth label="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} margin="normal" required />
-                <TextField fullWidth label="Descripción" value={descripcion} onChange={(e) => setDescripcion(e.target.value)} margin="normal" required />
-                <TextField fullWidth label="Tipo" value={tipo} onChange={(e) => setTipo(e.target.value)} margin="normal" required />
-                <input type="file" accept="image/*" onChange={handleFileChange} style={{ marginTop: '10px' }} required />
-                <Button type="submit" variant="contained" color="primary" fullWidth disabled={loading} style={{ marginTop: '20px' }}>
+                <TextField
+                    fullWidth
+                    label="Nombre"
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
+                    margin="normal"
+                    required
+                />
+                <TextField
+                    fullWidth
+                    label="Descripción"
+                    value={descripcion}
+                    onChange={(e) => setDescripcion(e.target.value)}
+                    margin="normal"
+                    multiline
+                    rows={4}
+                    required
+                />
+                <TextField
+                    fullWidth
+                    select
+                    label="Tipo"
+                    value={tipo}
+                    onChange={(e) => setTipo(e.target.value)}
+                    margin="normal"
+                    required
+                >
+                    <MenuItem value="Paramecia">Paramecia</MenuItem>
+                    <MenuItem value="Logia">Logia</MenuItem>
+                    <MenuItem value="Zoan">Zoan</MenuItem>
+                </TextField>
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    style={{ marginTop: '10px' }}
+                />
+                <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    disabled={loading}
+                    style={{ marginTop: '20px' }}
+                >
                     {loading ? "Guardando..." : "Agregar Fruta"}
                 </Button>
             </form>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Navbar from './componentes/Navbar';
 import Home from './paginas/Home';
+import EditarFruta from './paginas/EditarFruta';
 import Login from './paginas/Login';
 import Register from './paginas/Register';
 import AddFruit from './paginas/AddFruit';
@@ -66,6 +67,7 @@ const AppContent = ({ searchQuery, onSearch }) => {
                 <Route path="/add-fruit" element={<AddFruit />} />
                 <Route path="/inicio" element={<Inicio />} />
                 <Route path="/perfil" element={<Perfil />} />
+                <Route path="/editar-fruta/:id" element={<EditarFruta />}/>
                 <Route path="/editar-perfil" element={<EditarPerfil />} />
                 <Route path="/configuracion" element={<Configuracion />} />
                 <Route path="/lista-frutas" element={<ListaFrutas searchQuery={searchQuery} />} />

@@ -9,7 +9,7 @@ const ListaFrutas = ({ searchQuery }) => {
     const [loading, setLoading] = useState(true);
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
-    const tipoFruta = queryParams.get('tipo'); // Obtener el tipo de fruta desde la URL
+    const tipoFruta = queryParams.get('tipo');
 
     useEffect(() => {
         const fetchFrutas = async () => {
@@ -24,7 +24,7 @@ const ListaFrutas = ({ searchQuery }) => {
                 const frutasData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
                 // Filtrar frutas por tipo si hay un tipo especificado en la URL
-                const frutasFiltradas = tipoFruta 
+                const frutasFiltradas = tipoFruta
                     ? frutasData.filter(fruta => fruta.tipo.toLowerCase() === tipoFruta.toLowerCase())
                     : frutasData;
 
@@ -37,12 +37,14 @@ const ListaFrutas = ({ searchQuery }) => {
             }
         };
         fetchFrutas();
-    }, [tipoFruta]); // Dependencia en el tipo para que actualice al cambiar la URL
+    }, [tipoFruta]);
 
     // Filtrar frutas según el término de búsqueda
     const frutasFiltradas = frutas.filter((fruta) =>
         fruta.nombre.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
+    console.log("Frutas filtradas por búsqueda:", frutasFiltradas);
 
     if (loading) return <CircularProgress />;
 

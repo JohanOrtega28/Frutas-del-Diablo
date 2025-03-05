@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { db, storage } from '../firebase';
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { TextField, Button, Container, Typography, MenuItem } from '@mui/material';
+import { FruitContext } from '../context/FruitContext';
 
 const EditarFruta = () => {
     const { id } = useParams(); // Obtiene el ID de la fruta desde la URL
     const navigate = useNavigate();
+    const { updateFruit } = useContext(FruitContext);
     const [fruitData, setFruitData] = useState({
         nombre: '',
         tipo: '',
@@ -63,45 +66,75 @@ const EditarFruta = () => {
         }
 
         try {
-            await setDoc(doc(db, "frutasDelDiablo", id || fruitData.nombre.toLowerCase().replace(/\s+/g, '-')), fruitData);
-            alert(`Fruta "${fruitData.nombre}" guardada con éxito!`);
-            navigate('/inicio');
+            await updateFruit(id, fruitData);
+            alert(`Fruta "${fruitData.nombre}" actualizada con éxito!`);
+            navigate('/perfil');
         } catch (error) {
-            console.error("Error al guardar la fruta:", error);
-            alert("Hubo un error al guardar la fruta.");
+            console.error("Error al actualizar la fruta:", error);
+            alert("Hubo un error al actualizar la fruta.");
         }
     };
 
     return (
-        <div style={{ padding: '20px', textAlign: 'center' }}>
-            <h1>{id ? "Editar" : "Agregar"} Fruta del Diablo</h1>
-            <form onSubmit={handleSubmit} style={{ maxWidth: '400px', margin: '0 auto' }}>
-                <input
-                    type="text"
+        <Container style={{ marginTop: '20px', maxWidth: '400px' }}>
+            <Typography variant="h5" align="center" gutterBottom>
+                Editar Fruta del Diablo
+            </Typography>
+            <form onSubmit={handleSubmit}>
+                <TextField
+                    fullWidth
+                    label="Nombre"
                     name="nombre"
                     value={fruitData.nombre}
                     onChange={handleChange}
-                    placeholder="Nombre de la Fruta *"
+                    margin="normal"
                     required
                 />
-                <select name="tipo" value={fruitData.tipo} onChange={handleChange} required>
-                    <option value="">Tipo de Fruta</option>
-                    <option value="Paramecia">Paramecia</option>
-                    <option value="Logia">Logia</option>
-                    <option value="Zoan">Zoan</option>
-                </select>
-                <textarea
+                <TextField
+                    fullWidth
+                    select
+                    label="Tipo"
+                    name="tipo"
+                    value={fruitData.tipo}
+                    onChange={handleChange}
+                    margin="normal"
+                    required
+                >
+                    <MenuItem value="Paramecia">Paramecia</MenuItem>
+                    <MenuItem value="Logia">Logia</MenuItem>
+                    <MenuItem value="Zoan">Zoan</MenuItem>
+                </TextField>
+                <TextField
+                    fullWidth
+                    label="Descripción"
                     name="descripcion"
                     value={fruitData.descripcion}
                     onChange={handleChange}
-                    placeholder="Descripción *"
+                    margin="normal"
+                    multiline
+                    rows={4}
                     required
-                ></textarea>
-                <input type="file" accept="image/*" onChange={handleFileChange} />
-                {fruitData.imagenURL && <img src={fruitData.imagenURL} alt="Fruta" width="100px" />}
-                <button type="submit">GUARDAR CAMBIOS</button>
+                />
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    style={{ marginTop: '10px' }}
+                />
+                {fruitData.imagenURL && (
+                    <img src={fruitData.imagenURL} alt="Fruta" style={{ width: '100px', marginTop: '10px' }} />
+                )}
+                <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    style={{ marginTop: '20px' }}
+                >
+                    Guardar Cambios
+                </Button>
             </form>
-        </div>
+        </Container>
     );
 };
 
